@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cursomc.domain.Categoria;
 import br.com.cursomc.services.CategoriaService;
-import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -20,12 +19,7 @@ public class CategoriaResource {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<?> buscar(@PathVariable("id")   Integer id) {
-		Categoria categoria = null;
-		try {
-			categoria = categoriaService.buscar(id);
-		} catch (ObjectNotFoundException e) {
-			e.printStackTrace();
-		}
+		Categoria categoria = categoriaService.buscar(id);
 		return ResponseEntity.ok().body(categoria);
 	}
 	
